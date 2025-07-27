@@ -213,7 +213,7 @@ export default function Home() {
                     className="group bg-gray-900 hover:bg-gray-800 text-white border-gray-900 rounded-xl p-4 h-auto shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     onClick={() =>
                       window.open(
-                        "https://github.com/mahfuzurrahman01",
+                        "https://github.com/mahfuzurrahman01/ATS-resume-checker",
                         "_blank"
                       )
                     }
