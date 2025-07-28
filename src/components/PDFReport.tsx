@@ -122,7 +122,7 @@ export function PDFReport({ data }: PDFReportProps) {
             <h3>❌ Issues Found</h3>
             {(data?.ats_analysis?.issues?.length || 0) > 0 ? (
               <ul className="pdf-list">
-                {data.ats_analysis.issues.map((issue, index) => (
+                {data?.ats_analysis?.issues?.map((issue, index) => (
                   <li key={index}>{issue}</li>
                 ))}
               </ul>
@@ -134,7 +134,7 @@ export function PDFReport({ data }: PDFReportProps) {
             <h3>💡 Recommendations</h3>
             {(data?.ats_analysis?.recommendations?.length || 0) > 0 ? (
               <ul className="pdf-list">
-                {data.ats_analysis.recommendations.map((rec, index) => (
+                {data?.ats_analysis?.recommendations?.map((rec, index) => (
                   <li key={index}>{rec}</li>
                 ))}
               </ul>
@@ -155,7 +155,7 @@ export function PDFReport({ data }: PDFReportProps) {
             </h3>
             {(data?.ats_analysis?.keyword_matches?.length || 0) > 0 ? (
               <div className="pdf-keywords">
-                {data.ats_analysis.keyword_matches.map((keyword, index) => (
+                {data?.ats_analysis?.keyword_matches?.map((keyword, index) => (
                   <span key={index} className="keyword-found">
                     {keyword}
                   </span>
@@ -172,7 +172,7 @@ export function PDFReport({ data }: PDFReportProps) {
             </h3>
             {(data?.ats_analysis?.missing_keywords?.length || 0) > 0 ? (
               <div className="pdf-keywords">
-                {data.ats_analysis.missing_keywords.map((keyword, index) => (
+                {data?.ats_analysis?.missing_keywords?.map((keyword, index) => (
                   <span key={index} className="keyword-missing">
                     {keyword}
                   </span>
