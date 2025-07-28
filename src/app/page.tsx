@@ -5,11 +5,12 @@ import { FileUpload } from "@/components/FileUpload";
 import { ResultsDisplay } from "@/components/ResultsDisplay";
 import { ProSuggestions } from "@/components/ProSuggestions";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { PDFReport } from "@/components/PDFReport";
 import { ResumeData } from "@/lib/gemini-service";
 import { Button } from "@/components/ui/button";
 import {
   Upload,
-  Printer,
+  Download,
   Copy,
   Eye,
   Github,
@@ -18,6 +19,8 @@ import {
 } from "lucide-react";
 import { gsap } from "gsap";
 import { useRouter } from "next/navigation";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 export default function Home() {
   const router = useRouter();
@@ -146,6 +149,75 @@ export default function Home() {
   const handleReset = () => {
     setResults(null);
     setError(null);
+  };
+
+  const handleDownloadReport = async () => {
+    try {
+      // Create a temporary container for the PDF report
+      const tempContainer = document.createElement("div");
+      tempContainer.style.position = "absolute";
+      tempContainer.style.left = "-9999px";
+      tempContainer.style.top = "0";
+      tempContainer.style.width = "800px";
+      tempContainer.style.backgroundColor = "#ffffff";
+      tempContainer.style.padding = "20px";
+      tempContainer.style.fontFamily = "Arial, sans-serif";
+      document.body.appendChild(tempContainer);
+
+      // Render the PDFReport component into the temporary container
+      const { createRoot } = await import("react-dom/client");
+      const root = createRoot(tempContainer);
+      root.render(<PDFReport data={results!} />);
+
+      // Wait for the component to render
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // Create canvas from the temporary container
+      const canvas = await html2canvas(tempContainer, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#ffffff",
+        width: 800,
+        height: tempContainer.scrollHeight,
+        logging: false,
+      });
+
+      // Clean up
+      root.unmount();
+      document.body.removeChild(tempContainer);
+
+      // Create PDF
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 190; // A4 width minus margins
+      const pageHeight = 277; // A4 height minus margins
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+
+      let position = 0;
+
+      // Add first page
+      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add additional pages if needed
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 10, position + 10, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // Download the PDF
+      const fileName = `resume-analysis-${
+        new Date().toISOString().split("T")[0]
+      }.pdf`;
+      pdf.save(fileName);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Failed to generate PDF. Please try again.");
+    }
   };
 
   return (
@@ -311,12 +383,12 @@ export default function Home() {
                       Upload Another Resume
                     </Button>
                     <Button
-                      onClick={() => window.print()}
+                      onClick={handleDownloadReport}
                       size="sm"
                       className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                     >
-                      <Printer className="h-4 w-4 mr-2" />
-                      Print Report
+                      <Download className="h-4 w-4 mr-2" />
+                      Download Report
                     </Button>
                   </div>
                 )}
