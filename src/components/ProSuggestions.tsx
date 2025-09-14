@@ -39,15 +39,15 @@ export function ProSuggestions({
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "Critical":
-        return "bg-red-900/50 text-red-300 border-red-700/30";
+        return "bg-gradient-to-r from-red-100 to-pink-200 text-red-800 border-red-300";
       case "High":
-        return "bg-orange-900/50 text-orange-300 border-orange-700/30";
+        return "bg-gradient-to-r from-orange-100 to-yellow-200 text-orange-800 border-orange-300";
       case "Medium":
-        return "bg-blue-900/50 text-blue-300 border-blue-700/30";
+        return "bg-gradient-to-r from-blue-100 to-cyan-200 text-blue-800 border-blue-300";
       case "Low":
-        return "bg-gray-700/50 text-gray-300 border-gray-600/30";
+        return "bg-gradient-to-r from-gray-100 to-slate-200 text-gray-800 border-gray-300";
       default:
-        return "bg-gray-700/50 text-gray-300 border-gray-600/30";
+        return "bg-gradient-to-r from-gray-100 to-slate-200 text-gray-800 border-gray-300";
     }
   };
 
@@ -115,15 +115,15 @@ export function ProSuggestions({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <Card className="bg-gray-900/20 backdrop-blur-xl border border-gray-700/30 shadow-2xl">
+      <Card className="bg-gradient-to-br from-purple-50 to-violet-100 border border-purple-200 shadow-xl hover:shadow-2xl transition-all duration-300">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center space-x-2 mb-2">
-            <Crown className="h-6 w-6 text-yellow-400" />
-            <CardTitle className="text-2xl font-bold text-white">
+            <Crown className="h-6 w-6 text-yellow-600" />
+            <CardTitle className="text-2xl font-bold text-purple-800">
               AI-Powered Resume Optimization
             </CardTitle>
           </div>
-          <CardDescription className="text-gray-300">
+          <CardDescription className="text-purple-700">
             Get personalized suggestions to make your resume 100% ATS-friendly
           </CardDescription>
         </CardHeader>
@@ -131,15 +131,15 @@ export function ProSuggestions({
 
       {/* Pro Features Preview */}
       {!showAllSuggestions && (
-        <Card className="border-2 border-dashed border-gray-600/50 bg-gray-900/20 backdrop-blur-xl">
+        <Card className="border-2 border-dashed border-gray-300 bg-gradient-to-br from-indigo-50 to-purple-100 shadow-xl">
           <CardContent className="p-8 text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
-              <Lock className="h-8 w-8 text-gray-400" />
-              <h3 className="text-xl font-semibold text-white">
+              <Lock className="h-8 w-8 text-gray-600" />
+              <h3 className="text-xl font-semibold text-gray-900">
                 Pro Features Locked
               </h3>
             </div>
-            <p className="text-gray-300 mb-6 max-w-md mx-auto">
+            <p className="text-gray-700 mb-6 max-w-md mx-auto">
               Unlock advanced AI suggestions and personalized recommendations to
               transform your resume into an ATS magnet.
             </p>
@@ -159,10 +159,10 @@ export function ProSuggestions({
       {showAllSuggestions && (
         <div className="space-y-6">
           <div className="text-center">
-            <h2 className="text-xl font-semibold mb-2 text-white">
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">
               Your Personalized AI Optimization Plan
             </h2>
-            <p className="text-gray-300">
+            <p className="text-gray-700">
               Based on your resume analysis, here are the specific changes to
               maximize your ATS compatibility
             </p>
@@ -171,7 +171,7 @@ export function ProSuggestions({
           {proSuggestions.map((category, index) => (
             <Card
               key={index}
-              className="bg-gray-900/20 backdrop-blur-xl border border-gray-700/30 shadow-2xl"
+              className="bg-gradient-to-br from-slate-50 to-gray-100 border border-slate-200 shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -184,13 +184,13 @@ export function ProSuggestions({
                       <span className="ml-1">{category.priority}</span>
                     </Badge>
                     <div>
-                      <CardTitle className="text-lg text-white">
+                      <CardTitle className="text-lg text-gray-900">
                         {category.category}
                       </CardTitle>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium text-green-400">
+                    <p className="text-sm font-medium text-green-600">
                       {category.impact}
                     </p>
                   </div>
@@ -201,10 +201,10 @@ export function ProSuggestions({
                   {category.suggestions.map((suggestion, suggestionIndex) => (
                     <div
                       key={suggestionIndex}
-                      className="flex items-start space-x-3 p-3 bg-gray-800/50 rounded-lg border border-gray-700/30"
+                      className="flex items-start space-x-3 p-4 bg-white/80 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200"
                     >
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-sm text-gray-300">{suggestion}</p>
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-800 leading-relaxed">{suggestion}</p>
                     </div>
                   ))}
                 </div>
@@ -213,39 +213,39 @@ export function ProSuggestions({
           ))}
 
           {/* Summary */}
-          <Card className="bg-gray-900/30 backdrop-blur-xl border border-gray-700/30">
+          <Card className="bg-gradient-to-br from-emerald-50 to-teal-100 border border-emerald-200 shadow-xl">
             <CardContent className="p-6">
               <div className="text-center space-y-4">
-                <h3 className="text-lg font-semibold text-white">
+                <h3 className="text-lg font-semibold text-emerald-900">
                   Action Plan Summary
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/30">
-                    <div className="text-2xl font-bold text-green-400 mb-1">
+                  <div className="bg-white/80 rounded-lg p-4 border border-emerald-200 shadow-sm">
+                    <div className="text-2xl font-bold text-green-600 mb-1">
                       {summary.total_categories}
                     </div>
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-gray-700">
                       Categories to Optimize
                     </div>
                   </div>
-                  <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/30">
-                    <div className="text-2xl font-bold text-blue-400 mb-1">
+                  <div className="bg-white/80 rounded-lg p-4 border border-emerald-200 shadow-sm">
+                    <div className="text-2xl font-bold text-blue-600 mb-1">
                       {summary.total_suggestions}
                     </div>
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-gray-700">
                       Specific Suggestions
                     </div>
                   </div>
-                  <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/30">
-                    <div className="text-2xl font-bold text-purple-400 mb-1">
+                  <div className="bg-white/80 rounded-lg p-4 border border-emerald-200 shadow-sm">
+                    <div className="text-2xl font-bold text-purple-600 mb-1">
                       +{summary.potential_score_increase}
                     </div>
-                    <div className="text-sm text-gray-300">
+                    <div className="text-sm text-gray-700">
                       Potential Score Increase
                     </div>
                   </div>
                 </div>
-                <p className="text-sm text-gray-300">
+                <p className="text-sm text-gray-700">
                   Implement these suggestions to transform your resume from good
                   to exceptional ATS compatibility
                 </p>

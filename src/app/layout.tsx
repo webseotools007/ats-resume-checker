@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { Background } from "@/components/Background";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={inter.className}>
         <div className="min-h-screen w-full relative !bg-transparent">
           <Background />
@@ -28,7 +29,8 @@ export default function RootLayout({
           <div className="relative z-10">
             <Analytics />
             <Navbar />
-            <div className="text-white !bg-transparent">{children}</div>
+            <div className="text-gray-900 !bg-transparent">{children}</div>
+            <Footer />
           </div>
         </div>
       </body>

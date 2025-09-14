@@ -87,15 +87,15 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
   };
 
   return (
-    <Card className="w-full bg-gray-900/20 backdrop-blur-xl border border-gray-700/30 shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-3xl">
+    <Card className="w-full bg-white/80 backdrop-blur-xl border border-gray-200 shadow-2xl hover:shadow-3xl transition-all duration-300 rounded-3xl">
       <CardContent className="p-5">
         <div
           className={`border-2 border-dashed rounded-3xl p-5 text-center transition-all duration-300 relative overflow-hidden ${
             isDragOver
-              ? "border-purple-400 bg-gray-900/40 backdrop-blur-md scale-105"
+              ? "border-purple-400 bg-purple-50 backdrop-blur-md scale-105"
               : selectedFile
-              ? "border-green-400 bg-gray-900/30 backdrop-blur-md"
-              : "border-gray-600/50 hover:border-purple-300 hover:bg-gray-900/20 hover:scale-[1.02] backdrop-blur-sm"
+              ? "border-green-400 bg-green-50 backdrop-blur-md"
+              : "border-gray-300 hover:border-purple-300 hover:bg-gray-50 hover:scale-[1.02] backdrop-blur-sm"
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
@@ -123,19 +123,27 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
                     {getFileIcon()}
                   </div>
                   <div className="text-left">
-                    <p className="font-semibold text-white text-lg">
+                    <p className="font-semibold text-gray-900 text-lg">
                       {selectedFile.name}
                     </p>
-                    <p className="text-sm text-gray-300 mt-1">
+                    <p className="text-sm text-gray-600 mt-1">
                       {getFileSize(selectedFile.size)}
                     </p>
                   </div>
                 </div>
               </div>
               {isProcessing && (
-                <div className="flex items-center justify-center space-x-3 text-purple-600 bg-purple-50 rounded-xl p-4">
-                  <div className="w-6 h-6 border-2 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
-                  <span className="font-medium">Processing your resume...</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-center space-x-3 text-purple-600 bg-purple-50 rounded-xl p-4">
+                    <div className="w-6 h-6 border-2 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+                    <span className="font-medium">Processing your resume...</span>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs text-gray-500 mb-2">This usually takes 10-30 seconds</div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full animate-pulse" style={{width: '44%'}}></div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -145,12 +153,12 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
                 {getFileIcon()}
               </div>
               <div>
-                <p className="text-xl font-semibold text-white mb-2">
+                <p className="text-xl font-semibold text-gray-900 mb-2">
                   {isDragOver
                     ? "Drop your resume here"
                     : "Drag and drop your resume"}
                 </p>
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-600 mb-6">
                   or click the button below to browse
                 </p>
                 <Button
@@ -173,7 +181,7 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
               </div>
 
               {/* File type info */}
-              <div className="flex items-center justify-center space-x-4 text-sm text-gray-300">
+              <div className="flex items-center justify-center space-x-4 text-sm text-gray-600">
                 <div className="flex items-center space-x-1">
                   <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span>PDF</span>
@@ -185,6 +193,9 @@ export function FileUpload({ onFileSelect, isProcessing }: FileUploadProps) {
                 <div className="flex items-center space-x-1">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <span>DOCX</span>
+                </div>
+                <div className="text-xs text-gray-500">
+                  Max 5MB for faster processing
                 </div>
               </div>
             </div>
