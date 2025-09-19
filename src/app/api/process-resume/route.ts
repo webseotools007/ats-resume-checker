@@ -7,11 +7,11 @@ const REQUEST_TIMEOUT = 45000; // 45 seconds timeout
 export async function POST(request: NextRequest) {
   try {
     // Set timeout for the entire request
-    const timeoutPromise = new Promise((_, reject) => {
+    const timeoutPromise = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('Request timeout - processing took too long')), REQUEST_TIMEOUT);
     });
 
-    const processPromise = async () => {
+    const processPromise = async (): Promise<NextResponse> => {
       const formData = await request.formData();
       const file = formData.get("file") as File;
 
@@ -71,8 +71,18 @@ export async function POST(request: NextRequest) {
     };
 
     // Race between processing and timeout
-    const result = await Promise.race([processPromise(), timeoutPromise]);
-    return result;
+    try {
+      const result = await Promise.race([processPromise(), timeoutPromise]);
+      return result;
+    } catch (timeoutError) {
+      if (timeoutError instanceof Error && timeoutError.message.includes('timeout')) {
+        return NextResponse.json(
+          { error: "Processing timeout. Please try with a smaller file or try again later." },
+          { status: 408 }
+        );
+      }
+      throw timeoutError;
+    }
 
   } catch (error) {
     console.error("Error processing resume:", error);
