@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GeminiService } from "@/lib/gemini-service";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // Reduced to 5MB for faster processing
-const REQUEST_TIMEOUT = 45000; // 45 seconds timeout
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB for comprehensive analysis
+const REQUEST_TIMEOUT = 75000; // 75 seconds timeout for detailed analysis
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       if (file.size > MAX_FILE_SIZE) {
         return NextResponse.json(
           {
-            error: "File size too large. Please upload a file smaller than 5MB for faster processing.",
+            error: "File size too large. Please upload a file smaller than 10MB.",
           },
           { status: 400 }
         );
