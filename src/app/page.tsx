@@ -313,7 +313,7 @@ export default function Home() {
                       <Award className="h-6 w-6 text-white" />
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Expert Feedback</h3>
-                    <p className="text-gray-600 text-sm">Get professional-grade suggestions to improve your resume's impact and readability.</p>
+                    <p className="text-gray-600 text-sm">Get professional-grade suggestions to improve your resume&apos;s impact and readability.</p>
                   </div>
 
                   <div className="group bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-5 hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-purple-100">
@@ -377,7 +377,7 @@ export default function Home() {
                 >
                   <div className="text-center mb-6">
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">Trusted by Professionals</h3>
-                    <p className="text-gray-600">Join thousands who've improved their job prospects</p>
+                    <p className="text-gray-600">Join thousands who&apos;ve improved their job prospects</p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     <div className="group text-center">
